@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>结直肠癌预防生活方式指导</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Microsoft YaHei', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: white;
+            text-align: center;
+            padding: 30px;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .tabs {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #dee2e6;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            color: #6c757d;
+            transition: all 0.3s ease;
+        }
+        
+        .tab.active {
+            background: white;
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+        }
+        
+        .tab-content {
+            display: none;
+            padding: 30px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .form-section {
+            margin-bottom: 30px;
+        }
+        
+        .form-title {
+            color: #2c3e50;
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-label {
+            font-weight: 500;
+            margin-bottom: 8px;
+            color: #2c3e50;
+        }
+        
+        .form-input {
+            padding: 10px;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            font-size: 14px;
+        }
+        
+        .form-input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        
+        .radio-group {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .radio-option input[type="radio"] {
+            width: 16px;
+            height: 16px;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-secondary {
+            background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+        }
+        
+        .result-section {
+            display: none;
+            background: #d5f4e6;
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 20px;
+        }
+        
+        .result-title {
+            color: #27ae60;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .suggestions {
+            display: grid;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .suggestion-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+        
+        .high-priority {
+            border-color: #e74c3c;
+        }
+        
+        .medium-priority {
+            border-color: #f39c12;
+        }
+        
+        .low-priority {
+            border-color: #27ae60;
+        }
+        
+        .suggestion-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .suggestion-content {
+            color: #555;
+            line-height: 1.6;
+        }
+        
+        .evidence-tag {
+            display: inline-block;
+            background: #e8f4fd;
+            color: #3498db;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>个性化生活方式指导系统</h1>
+            <p>基于您的个体特征，提供循证医学的健康生活建议</p>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab active" onclick="showTab('info')">个人信息</button>
+            <button class="tab" onclick="showTab('diet')">饮食指导</button>
+            <button class="tab" onclick="showTab('exercise')">运动建议</button>
+            <button class="tab" onclick="showTab('habits')">生活习惯</button>
+        </div>
+        
+        <!-- 个人信息 -->
+        <div id="info" class="tab-content active">
+            <div class="form-section">
+                <div class="form-title">👤 基本信息</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">年龄</label>
+                        <input type="number" class="form-input" id="age" min="40" max="80" placeholder="请输入年龄">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">性别</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="gender" value="male" id="male">
+                                <label for="male">男性</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="gender" value="female" id="female">
+                                <label for="female">女性</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">身高 (cm)</label>
+                        <input type="number" class="form-input" id="height" min="120" max="220" placeholder="请输入身高">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">体重 (kg)</label>
+                        <input type="number" class="form-input" id="weight" min="30" max="200" placeholder="请输入体重">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-title">🏃 生活习惯</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">吸烟情况</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="smoking" value="never" id="never-smoke">
+                                <label for="never-smoke">从不吸烟</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="smoking" value="former" id="former-smoke">
+                                <label for="former-smoke">已戒烟</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="smoking" value="current" id="current-smoke">
+                                <label for="current-smoke">目前吸烟</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">饮酒情况</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="drinking" value="never" id="never-drink">
+                                <label for="never-drink">不饮酒</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="drinking" value="occasional" id="occasional-drink">
+                                <label for="occasional-drink">偶尔饮酒</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="drinking" value="regular" id="regular-drink">
+                                <label for="regular-drink">经常饮酒</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">运动频率</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="exercise" value="rarely" id="rarely-exercise">
+                                <label for="rarely-exercise">很少运动</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="exercise" value="sometimes" id="sometimes-exercise">
+                                <label for="sometimes-exercise">偶尔运动</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="exercise" value="regular" id="regular-exercise">
+                                <label for="regular-exercise">经常运动</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">工作性质</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="work" value="sedentary" id="sedentary-work">
+                                <label for="sedentary-work">久坐办公</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="work" value="active" id="active-work">
+                                <label for="active-work">活动较多</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="work" value="physical" id="physical-work">
+                                <label for="physical-work">体力劳动</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="form-title">🏥 健康状况</div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">是否有慢性疾病？</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="chronic" value="none" id="no-chronic">
+                                <label for="no-chronic">无</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="chronic" value="diabetes" id="diabetes">
+                                <label for="diabetes">糖尿病</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="chronic" value="hypertension" id="hypertension">
+                                <label for="hypertension">高血压</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="chronic" value="multiple" id="multiple">
+                                <label for="multiple">多种疾病</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">家族肿瘤史</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="family" value="none" id="no-family">
+                                <label for="no-family">无</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="family" value="distant" id="distant-family">
+                                <label for="distant-family">远亲有</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="family" value="close" id="close-family">
+                                <label for="close-family">直系亲属有</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center;">
+                <button class="btn" onclick="generateRecommendations()">生成个性化建议</button>
+                <button class="btn btn-secondary" onclick="resetForm()">重新填写</button>
+            </div>
+            
+            <div id="results" class="result-section">
+                <div class="result-title">💚 您的个性化健康建议</div>
+                <p style="text-align: center; color: #7f8c8d; margin-bottom: 20px;">
+                    基于您的个人信息，我们为您提供以下循证医学指导方案
+                </p>
+                <div id="suggestions" class="suggestions">
+                    <!-- 动态生成建议内容 -->
+                </div>
+            </div>
+        </div>
+        
+        <!-- 饮食指导 -->
+        <div id="diet" class="tab-content">
+            <div class="form-section">
+                <div class="form-title">🥗 饮食预防建议</div>
+                
+                <div class="suggestion-card high-priority">
+                    <div class="suggestion-title">🔴 高优先级：增加膳食纤维</div>
+                    <div class="suggestion-content">
+                        每日摄入25-30克膳食纤维，重点包括：
+                        <br>• 全谷物：糙米、燕麦、全麦面包
+                        <br>• 豆类：红豆、绿豆、黄豆及其制品
+                        <br>• 蔬菜：深色蔬菜每日300-500克
+                        <br>• 水果：每日200-350克新鲜水果
+                    </div>
+                    <div class="evidence-tag">循证证据：膳食纤维可降低结直肠癌风险29%</div>
+                </div>
+                
+                <div class="suggestion-card high-priority">
+                    <div class="suggestion-title">🔴 高优先级：限制红肉和加工肉类</div>
+                    <div class="suggestion-content">
+                        • 红肉（猪牛羊肉）：每周不超过500克，约70克/天
+                        <br>• 避免加工肉类：香肠、腊肉、火腿等尽量不吃
+                        <br>• 推荐替代：鱼类、禽肉、豆制品
+                        <br>• 烹饪方式：蒸煮炖优于煎炸烤
+                    </div>
+                    <div class="evidence-tag">循证证据：加工肉类被WHO列为1类致癌物</div>
+                </div>
+                
+                <div class="suggestion-card medium-priority">
+                    <div class="suggestion-title">🟡 中等优先级：钙和维生素D</div>
+                    <div class="suggestion-content">
+                        • 钙：每日800-1000mg，优先食物来源
+                        <br>• 奶类：每日300ml牛奶或等量奶制品
+                        <br>• 绿叶蔬菜：菠菜、芥蓝、小白菜
+                        <br>• 维生素D：适度日光照射，必要时补充
+                    </div>
+                    <div class="evidence-tag">循证证据：钙摄入可降低结直肠癌风险12%</div>
+                </div>
+                
+                <div class="suggestion-card low-priority">
+                    <div class="suggestion-title">🟢 日常建议：健康烹饪方式</div>
+                    <div class="suggestion-content">
+                        • 少油少盐：每日用油25-30克，盐6克以下
+                        <br>• 多样化饮食：每日12种以上食物
+                        <br>• 规律进餐：三餐定时，避免暴饮暴食
+                        <br>• 充足饮水：每日1500-1700ml白开水
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 运动建议 -->
+        <div id="exercise" class="tab-content">
+            <div class="form-section">
+                <div class="form-title">🏃 科学运动建议</div>
+                
+                <div class="suggestion-card high-priority">
+                    <div class="suggestion-title">🔴 核心建议：中等强度有氧运动</div>
+                    <div class="suggestion-content">
+                        <strong>推荐方案：</strong>每周至少150分钟中等强度有氧运动
+                        <br><br><strong>适宜运动（按年龄分层）：</strong>
+                        <br>• <strong>45-59岁：</strong>快走、慢跑、游泳、骑自行车、爬楼梯
+                        <br>• <strong>60-69岁：</strong>快走、太极拳、广场舞、游泳（有基础者）
+                        <br>• <strong>70岁以上：</strong>散步、太极拳、八段锦、轻松园艺活动
+                        <br><br><strong>强度判断：</strong>运动时能说话但不能唱歌，微微出汗
+                    </div>
+                    <div class="evidence-tag">循证证据：规律运动可降低结直肠癌风险24%</div>
+                </div>
+                
+                <div class="suggestion-card medium-priority">
+                    <div class="suggestion-title">🟡 减少久坐时间</div>
+                    <div class="suggestion-content">
+                        • <strong>久坐危害：</strong>每日久坐超过6小时增加癌症风险
+                        <br>• <strong>建议间隔：</strong>每坐1小时起身活动3-5分钟
+                        <br>• <strong>简单活动：</strong>站立、走动、伸展、爬楼梯
+                        <br>• <strong>工作调整：</strong>站立办公、走路开会、远距离停车
+                    </div>
+                    <div class="evidence-tag">循证证据：久坐增加结直肠癌风险8%</div>
+                </div>
+                
+                <div class="suggestion-card low-priority">
+                    <div class="suggestion-title">🟢 运动安全提醒</div>
+                    <div class="suggestion-content">
+                        • <strong>循序渐进：</strong>从每周90分钟开始，逐步增加
+                        <br>• <strong>量力而行：</strong>有慢性病者需咨询医生
+                        <br>• <strong>运动前后：</strong>适当热身和放松
+                        <br>• <strong>持之以恒：</strong>养成习惯比强度更重要
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 生活习惯 -->
+        <div id="habits" class="tab-content">
+            <div class="form-section">
+                <div class="form-title">🌟 健康生活习惯</div>
+                
+                <div class="suggestion-card high-priority">
+                    <div class="suggestion-title">🔴 戒烟限酒</div>
+                    <div class="suggestion-content">
+                        <strong>戒烟：</strong>
+                        <br>• 吸烟增加结直肠癌风险18%，戒烟10年后风险显著降低
+                        <br>• 戒烟方法：逐步减量、寻求专业帮助、使用戒烟辅助品
+                        <br><br><strong>限酒：</strong>
+                        <br>• 男性每日不超过25克酒精（约1两白酒）
+                        <br>• 女性每日不超过15克酒精（约半两白酒）
+                        <br>• 最好选择：完全不饮酒
+                    </div>
+                    <div class="evidence-tag">循证证据：每日饮酒增加结直肠癌风险7%</div>
+                </div>
+                
+                <div class="suggestion-card medium-priority">
+                    <div class="suggestion-title">🟡 体重管理</div>
+                    <div class="suggestion-content">
+                        • <strong>健康BMI：</strong>18.5-23.9 kg/m²（亚洲标准）
+                        <br>• <strong>腰围控制：</strong>男性<90cm，女性<85cm
+                        <br>• <strong>减重策略：</strong>合理饮食+适量运动，每周减重0.5-1kg
+                        <br>• <strong>维持体重：</strong>定期监测，及时调整
+                    </div>
+                    <div class="evidence-tag">循证证据：肥胖增加结直肠癌风险30%</div>
+                </div>
+                
+                <div class="suggestion-card low-priority">
+                    <div class="suggestion-title">🟢 规律作息</div>
+                    <div class="suggestion-content">
+                        • <strong>充足睡眠：</strong>每晚7-8小时，规律作息
+                        <br>• <strong>压力管理：</strong>学会放松，保持乐观心态
+                        <br>• <strong>定期体检：</strong>按时参加健康筛查
+                        <br>• <strong>关注症状：</strong>便血、腹痛、排便习惯改变需及时就医
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // 隐藏所有标签页内容
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+            
+            // 移除所有标签的active类
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // 显示选中的标签页
+            document.getElementById(tabName).classList.add('active');
+            event.target.classList.add('active');
+        }
+
+        function generateRecommendations() {
+            // 获取用户输入
+            const age = parseInt(document.getElementById('age').value);
+            const height = parseInt(document.getElementById('height').value);
+            const weight = parseInt(document.getElementById('weight').value);
+            const gender = document.querySelector('input[name="gender"]:checked')?.value;
+            const smoking = document.querySelector('input[name="smoking"]:checked')?.value;
+            const drinking = document.querySelector('input[name="drinking"]:checked')?.value;
+            const exercise = document.querySelector('input[name="exercise"]:checked')?.value;
+            const work = document.querySelector('input[name="work"]:checked')?.value;
+            const chronic = document.querySelector('input[name="chronic"]:checked')?.value;
+            const family = document.querySelector('input[name="family"]:checked')?.value;
+
+            // 验证必填字段
+            if (!age || !height || !weight || !gender) {
+                alert('请填写完整的基本信息');
+                return;
+            }
+
+            // 计算BMI
+            const bmi = (weight / (height/100)**2).toFixed(1);
+            
+            // 生成个性化建议
+            const suggestions = [];
+            
+            // 体重管理建议
+            if (bmi >= 24) {
+                suggestions.push({
+                    type: 'high-priority',
+                    title: '🔴 体重管理 - 减重建议',
+                    content: `您的BMI为${bmi}（${bmi >= 28 ? '肥胖' : '超重'}），建议通过合理饮食和适量运动来控制体重。目标体重：${Math.round(height/100 * height/100 * 22)}kg左右。每周减重0.5-1公斤为宜。`,
+                    evidence: '肥胖增加结直肠癌风险30%'
+                });
+            } else if (bmi < 18.5) {
+                suggestions.push({
+                    type: 'medium-priority',
+                    title: '🟡 体重管理 - 增重建议',
+                    content: `您的BMI为${bmi}（偏瘦），建议适当增加营养摄入，保持规律运动，将体重提升到健康范围。`,
+                    evidence: '维持健康体重有助于降低疾病风险'
+                });
+            }
+
+            // 吸烟建议
+            if (smoking === 'current') {
+                suggestions.push({
+                    type: 'high-priority',
+                    title: '🔴 戒烟建议',
+                    content: '强烈建议戒烟！可寻求戒烟门诊帮助，使用戒烟药物，或通过逐步减量的方式戒烟。戒烟10年后，结直肠癌风险可显著降低。',
+                    evidence: '吸烟增加结直肠癌风险18%'
+                });
+            } else if (smoking === 'former') {
+                suggestions.push({
+                    type: 'low-priority',
+                    title: '🟢 戒烟成功',
+                    content: '恭喜您已经戒烟！请继续保持，避免复吸。您的健康风险正在持续降低。',
+                    evidence: '戒烟带来持续的健康获益'
+                });
+            }
+
+            // 饮酒建议
+            if (drinking === 'regular') {
+                suggestions.push({
+                    type: 'high-priority',
+                    title: '🔴 限制饮酒',
+                    content: `建议限制饮酒量：${gender === 'male' ? '男性每日不超过25克酒精（约1两白酒）' : '女性每日不超过15克酒精（约半两白酒）'}。最好的选择是完全不饮酒。`,
+                    evidence: '每日饮酒增加结直肠癌风险7%'
+                });
+            }
+
+            // 运动建议
+            if (exercise === 'rarely') {
+                const ageGroup = age >= 70 ? '70岁以上' : age >= 60 ? '60-69岁' : '45-59岁';
+                let exerciseRecommendation = '';
+                
+                if (age >= 70) {
+                    exerciseRecommendation = '建议从散步开始，每日30分钟，可选择太极拳、八段锦等温和运动。量力而行，循序渐进。';
+                } else if (age >= 60) {
+                    exerciseRecommendation = '建议快走、太极拳、广场舞等，每周至少150分钟中等强度运动。';
+                } else {
+                    exerciseRecommendation = '建议快走、慢跑、游泳、骑自行车等，每周至少150分钟中等强度运动。';
+                }
+                
+                suggestions.push({
+                    type: 'high-priority',
+                    title: '🔴 增加运动量',
+                    content: `您目前运动较少，${exerciseRecommendation}如有慢性疾病，请先咨询医生。`,
+                    evidence: '规律运动可降低结直肠癌风险24%'
+                });
+            }
+
+            // 久坐建议
+            if (work === 'sedentary') {
+                suggestions.push({
+                    type: 'medium-priority',
+                    title: '🟡 减少久坐',
+                    content: '您的工作需要长时间久坐，建议每小时起身活动3-5分钟，可以站立办公、走路开会，或选择较远的停车位增加步行。',
+                    evidence: '久坐超过6小时/天增加结直肠癌风险8%'
+                });
+            }
+
+            // 家族史建议
+            if (family === 'close') {
+                suggestions.push({
+                    type: 'high-priority',
+                    title: '🔴 高危人群筛查',
+                    content: '您有直系亲属肿瘤史，属于高危人群。建议更加严格地执行健康生活方式，并按时参加结直肠癌筛查。必要时提前筛查年龄。',
+                    evidence: '家族史增加结直肠癌风险2-3倍'
+                });
+            }
+
+            // 慢性病管理
+            if (chronic !== 'none') {
+                suggestions.push({
+                    type: 'medium-priority',
+                    title: '🟡 慢性病管理',
+                    content: '请严格按医嘱管理慢性疾病，定期复查，控制血糖血压达标。良好的慢性病控制有助于降低肿瘤风险。',
+                    evidence: '糖尿病患者结直肠癌风险增加30%'
+                });
+            }
+
+            // 年龄相关建议
+            if (age >= 65) {
+                suggestions.push({
+                    type: 'low-priority',
+                    title: '🟢 老年健康',
+                    content: '注意营养均衡，预防跌倒，保持社交活动，定期体检。如有排便习惯改变、便血等症状，及时就医。',
+                    evidence: '年龄是结直肠癌的重要危险因素'
+                });
+            }
+
+            // 通用建议
+            suggestions.push({
+                type: 'low-priority',
+                title: '🟢 定期筛查',
+                content: '45-74岁人群建议定期进行结直肠癌筛查。FIT检测每年1次，结肠镜检查每10年1次（如结果正常）。早发现早治疗，治愈率可达90%以上。',
+                evidence: '规律筛查可降低结直肠癌死亡率16%'
+            });
+
+            // 显示结果
+            displayRecommendations(suggestions);
+        }
+
+        function displayRecommendations(suggestions) {
+            const suggestionsContainer = document.getElementById('suggestions');
+            suggestionsContainer.innerHTML = '';
+
+            suggestions.forEach(suggestion => {
+                const card = document.createElement('div');
+                card.className = `suggestion-card ${suggestion.type}`;
+                card.innerHTML = `
+                    <div class="suggestion-title">${suggestion.title}</div>
+                    <div class="suggestion-content">${suggestion.content}</div>
+                    <div class="evidence-tag">循证依据：${suggestion.evidence}</div>
+                `;
+                suggestionsContainer.appendChild(card);
+            });
+
+            document.getElementById('results').style.display = 'block';
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            // 重置所有表单元素
+            document.querySelectorAll('input[type="number"]').forEach(input => {
+                input.value = '';
+            });
+            document.querySelectorAll('input[type="radio"]').forEach(input => {
+                input.checked = false;
+            });
+            document.getElementById('results').style.display = 'none';
+        }
+
+        // 增加表单验证
+        document.addEventListener('DOMContentLoaded', function() {
+            // 为数字输入添加实时验证
+            const ageInput = document.getElementById('age');
+            const heightInput = document.getElementById('height');
+            const weightInput = document.getElementById('weight');
+
+            ageInput.addEventListener('input', function() {
+                if (this.value < 40) this.value = 40;
+                if (this.value > 80) this.value = 80;
+            });
+
+            heightInput.addEventListener('input', function() {
+                if (this.value < 120) this.value = 120;
+                if (this.value > 220) this.value = 220;
+            });
+
+            weightInput.addEventListener('input', function() {
+                if (this.value < 30) this.value = 30;
+                if (this.value > 200) this.value = 200;
+            });
+        });
+    </script>
+</body>
+</html>
